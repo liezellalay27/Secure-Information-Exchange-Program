@@ -254,22 +254,62 @@ def main():
     # Initialize the simulation
     sim = SecureExchangeSimulation(p=199, g=127)
     
-    # Example from the document
-    print("\n")
-    print("EXAMPLE 1: From Document")
-    print("User A: '9' (ASCII 57), User B: Character with ASCII 167")
+    print("\n" + "=" * 70)
+    print("SECURE INFORMATION EXCHANGE PROGRAM")
+    print("=" * 70)
     print()
+    print("What would you like to do?")
+    print("1. Run Example 1 (From Assignment: '9' and '§')")
+    print("2. Run Example 2 (Custom: 'A' and 'B')")
+    print("3. Enter Your Own Characters and Message")
+    print("=" * 70)
     
-    # User A has private key 57 (character '9')
-    # User B has private key 167 (character '§')
-    result = sim.simulate_exchange('9', '§', "The Mandalorian Must Always Recite, This is The Way!")
+    choice = input("\nSelect option (1, 2, or 3): ").strip()
     
-    print("\n\n")
-    print("EXAMPLE 2: Custom Test")
-    print("User A: 'A' (ASCII 65), User B: 'B' (ASCII 66)")
-    print()
+    if choice == "1":
+        print("\nEXAMPLE 1: From Assignment")
+        print("User A: '9' (ASCII 57), User B: '§' (ASCII 167)")
+        print()
+        result = sim.simulate_exchange('9', '§', "The Mandalorian Must Always Recite, This is The Way!")
+        
+    elif choice == "2":
+        print("\nEXAMPLE 2: Custom Test")
+        print("User A: 'A' (ASCII 65), User B: 'B' (ASCII 66)")
+        print()
+        result = sim.simulate_exchange('A', 'B', "Hello World!")
+        
+    elif choice == "3":
+        print("\n" + "-" * 70)
+        print("CUSTOM EXCHANGE")
+        print("-" * 70)
+        print()
+        
+        # Get User A's character
+        while True:
+            user_a = input("Enter User A's character (single character): ").strip()
+            if len(user_a) == 1:
+                break
+            print("Error: Please enter exactly ONE character")
+        
+        # Get User B's character
+        while True:
+            user_b = input("Enter User B's character (single character): ").strip()
+            if len(user_b) == 1:
+                break
+            print("Error: Please enter exactly ONE character")
+        
+        # Get message
+        while True:
+            message = input("Enter message to encrypt: ").strip()
+            if message:
+                break
+            print("Error: Message cannot be empty")
+        
+        print()
+        result = sim.simulate_exchange(user_a, user_b, message)
     
-    result = sim.simulate_exchange('A', 'B', "Hello World!")
+    else:
+        print("\nInvalid option. Please select 1, 2, or 3.")
     
 
 if __name__ == "__main__":
